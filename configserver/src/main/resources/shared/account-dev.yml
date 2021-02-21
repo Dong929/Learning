@@ -1,0 +1,19 @@
+server:
+  port: 8020
+spring:
+  application:
+    name: account
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://159.75.55.133:3306/learning
+    username: root
+    password: wmdydsybzd
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+mybatis-plus:
+    configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
