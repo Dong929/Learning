@@ -9,7 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="eurekaserver" />
         <module name="account" />
-        <module name="clientfeign" />
+        <module name="feign" />
         <module name="configserver" />
       </profile>
     </annotationProcessing>
@@ -24,6 +24,7 @@
       <module name="clientfeign" options="-parameters" />
       <module name="configserver" options="-parameters" />
       <module name="eurekaserver" options="-parameters" />
+      <module name="feign" options="-parameters" />
     </option>
   </component>
 </project>

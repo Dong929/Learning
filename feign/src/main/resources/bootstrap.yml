@@ -1,6 +1,6 @@
 spring:
   application:
-    name: clientfeign
+    name: feign
   profiles:
     active: dev
   cloud:

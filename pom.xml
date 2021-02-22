@@ -12,7 +12,7 @@
         <module>eurekaserver</module>
         <module>account</module>
         <module>configserver</module>
-        <module>clientfeign</module>
+        <module>feign</module>
     </modules>
 
     <!-- 引入Spring Boot依赖 -->
@@ -21,7 +21,6 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.0.7.RELEASE</version>
     </parent>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
