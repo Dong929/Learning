@@ -1,97 +1,164 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
-    <title>炫酷登录注册自由切换页面</title>
-
-    <link href="css/demo.css" rel="stylesheet" media="all" />
-
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            function fixHeight() {
-                var headerHeight = $("#switcher").height();
-                $("#iframe").attr("height", $(window).height()-54+ "px");
-            }
-            $(window).resize(function () {
-                fixHeight();
-            }).resize();
-
-            $('.icon-monitor').addClass('active');
-
-            $(".icon-mobile-3").click(function () {
-                $("#by").css("overflow-y", "auto");
-                $('#iframe-wrap').removeClass().addClass('mobile-width-3');
-                $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
-                $(this).addClass('active');
-                return false;
-            });
-
-            $(".icon-mobile-2").click(function () {
-                $("#by").css("overflow-y", "auto");
-                $('#iframe-wrap').removeClass().addClass('mobile-width-2');
-                $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
-                $(this).addClass('active');
-                return false;
-            });
-
-            $(".icon-mobile-1").click(function () {
-                $("#by").css("overflow-y", "auto");
-                $('#iframe-wrap').removeClass().addClass('mobile-width');
-                $('.icon-tablet,.icon-mobile,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
-                $(this).addClass('active');
-                return false;
-            });
-
-            $(".icon-tablet").click(function () {
-                $("#by").css("overflow-y", "auto");
-                $('#iframe-wrap').removeClass().addClass('tablet-width');
-                $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
-                $(this).addClass('active');
-                return false;
-            });
-
-            $(".icon-monitor").click(function () {
-                $("#by").css("overflow-y", "hidden");
-                $('#iframe-wrap').removeClass().addClass('full-width');
-                $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
-                $(this).addClass('active');
-                return false;
-            });
-        });
-    </script>
-
-    <script type="text/javascript">
-	function Responsive($a) {
-		if ($a == true) $("#Device").css("opacity", "100");
-		if ($a == false) $("#Device").css("opacity", "0");
-		$('#iframe-wrap').removeClass().addClass('full-width');
-		$('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
-		$(this).addClass('active');
-		return false;
-	};
-    </script>
-	
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <title>登录注册页面</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/demo2.css">
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/ban.js"></script>
 </head>
-<body id="by">
 
-<div id="switcher">
-    <div class="center">
-        <ul>
-            <div id="Device">
-                <li class="device-monitor"><a href="javascript:"><div class="icon-monitor"></div></a></li>
-                <li class="device-mobile"><a href="javascript:"><div class="icon-tablet"></div></a></li>
-                <li class="device-mobile"><a href="javascript:"><div class="icon-mobile-1"></div></a></li>
-                <li class="device-mobile-2"><a href="javascript:"><div class="icon-mobile-2"></div></a></li>
-                <li class="device-mobile-3"><a href="javascript:"><div class="icon-mobile-3"></div></a></li>
+
+<body>
+<canvas class="cavs" width="1040" height="867"></canvas>
+<div class="loginmain">
+    <section id="content">
+        <div class="content-header clearfix">
+            <a href="javascript:;" class="current" id="0">登陆</a>
+            <a href="javascript:;" id="1">我要注册</a>
+        </div>
+
+        <div class="content-body">
+            <div class="dom" style="display: block">
+                <form action="#">
+                    <div class="s1">
+                        <h4>账户</h4>
+                        <input type="text" id="username" placeholder="用户名(手机号)">
+                    </div>
+                    <div class="s1">
+                        <h4>密码</h4>
+                        <input type="password" id="password" placeholder="请输入密码">
+                    </div>
+                    <div class="s2">
+                        <input type="checkbox">
+                        <span>记住密码</span>
+                    </div>
+                    <input type="button" onclick="login()" class="btn" value="登&nbsp;陆">
+                </form>
+                <div class="dom-footer">
+                    <div class="login-another">
+                        <span>忘记密码?</span>
+                        <a href="">找回密码</a>
+                    </div>
+                </div>
             </div>
-        </ul>
-    </div>
-</div>
+            <div class="dom">
+                <form action="#">
+                    <div class="s1">
+                        <h4>手机号码</h4>
+                        <input type="text" id="phone" placeholder="用户名/手机/邮箱">
+                    </div>
+                    <div class="s1">
+                        <h4>密码</h4>
+                        <input type="password" id="password2" placeholder="请输入密码">
+                    </div>
+                    <div class="s1 msg-code">
+                        <h4>短信验证码</h4>
+                        <input type="text" id="verifyCode" placeholder="填写短信验证码">
+                        <input type="button" id="send" onclick="check()" value="获取短信验证码">
+                    </div>
+                    <input type="button" class="btn" onclick="register()" value="注&nbsp;册">
+                </form>
+            </div>
+        </div>
+    </section>
 
-<div id="iframe-wrap">
-    <iframe id="iframe" src="login2.html" frameborder="0"  width="100%"></iframe>
 </div>
+    <script>
+        $(function(){
+            let as = document.getElementsByClassName('content-header')[0].getElementsByTagName('a');
+            let contents = document.getElementsByClassName('dom');
+
+            // 1.2 遍历
+            for (let i = 0; i < as.length; i++) {
+                // 1.2.1 取出单个对象
+                let a = as[i];
+                // a.id = i;
+
+                // 1.2.2 监听鼠标的移动事件
+                a.onclick = function () {
+                    // 让所有的a的class都清除
+                    for (let j = 0; j < as.length; j++) {
+                        as[j].className = '';
+                        contents[j].style.display = 'none';
+                    }
+
+                    // 设置当前a的class
+                    this.className = 'current';
+                    // 从contents数组中取出对应的标签
+                    contents[this.id].style.display = 'block';
+                }
+            }
+        })
+        function login() {
+            var username = $('#username').val();
+            var password = $('#password').val();
+            $.ajax({
+                url: "/account/login",
+                type: "get",
+                data: {
+                    username: username,
+                    password:password,
+                    type:0
+                },
+                success:function(res){
+                    if( res == "登录成功"){
+                        window.location.href="index";
+                    }else{
+                        alert("登录失败！")
+                    }
+                },
+                error: function(){
+                    alert("登录失败！")
+                }
+                // error: function (xhr, textStatus, errorThrown) {
+                //     /*错误信息处理*/
+                //     alert("进入error---");
+                //     alert("状态码："+xhr.status);
+                //     alert("状态:"+xhr.readyState);//当前状态,0-未初始化，1-正在载入，2-已经载入，3-数据进行交互，4-完成。
+                //     alert("错误信息:"+xhr.statusText );
+                //     alert("返回响应信息："+xhr.responseText );//这里是详细的信息
+                //     alert("请求状态："+textStatus);
+                //     alert(errorThrown);
+                //     alert("请求失败");
+                // }
+            });
+        }
+        function register() {
+            var phone = $('#phone').val();
+            var password = $('#password2').val();
+            var verifyCode = $('#verifyCode').val();
+            $.ajax({
+                url: "/account/register",
+                type: "get",
+                data: {
+                    phone: phone,
+                    password: password,
+                    verifyCode: verifyCode
+                },
+                success:function(res){
+                    alert(res)
+                },
+                error:function(){
+                    alert('注册失败！');
+                },
+            });
+        }
+        function check() {
+            var phone = $('#phone').val();
+            $.ajax({
+                url: "/account/check",
+                type: "get",
+                data: {
+                    phone: phone
+                },
+                success:function(res){
+                    alert(res)
+                },
+                error:function(){
+                    alert('短信发送失败!');
+                },
+            });
+        }
+    </script>
 </body>
 </html>
