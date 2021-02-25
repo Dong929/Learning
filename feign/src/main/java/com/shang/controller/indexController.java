@@ -15,4 +15,13 @@ public class indexController {
     public String login(){
         return  "login";
     }
+    @RequestMapping("/header")
+    public String header(){
+        return  "/common/header.html";
+    }
+
+    @RequestMapping("/header2")
+    public String header2(){
+        return  "/common/header.html";
+    }
 }
