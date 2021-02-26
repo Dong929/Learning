@@ -24,4 +24,9 @@ public class indexController {
     public String header2(){
         return  "/common/header.html";
     }
+
+    @RequestMapping("/img")
+    public String img_upload(){
+        return "redirect:http://localhost:8030/user/set.html#avatar";
+    }
 }
