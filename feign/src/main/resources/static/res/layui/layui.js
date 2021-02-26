@@ -84,7 +84,7 @@
 		else {
 			var v = t.createElement("script"),
 				h = (u[f] ? y + "lay/" : /^\{\/\}/.test(p.modules[f]) ? "" : o.base || "") + (p.modules[f] || f) + ".js";  //拼接对应的js文件
-				console.log(h)
+				// console.log(h)
 			h = h.replace(/^\{\/\}/, ""), v.async = !0, v.charset = "utf-8", v.src = h + function() {
 					var e = o.version === !0 ? o.v || (new Date).getTime() : o.version || "";
 					return e ? "?v=" + e : ""

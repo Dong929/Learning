@@ -164,28 +164,53 @@ layui.define(['laypage', 'fly', 'element', 'flow'], function(exports){
   if($('.upload-img')[0]){
     layui.use('upload', function(upload){
       var avatarAdd = $('.avatar-add');
-
+      // elem: '#uploadAvator',
+      // url: '/user/upload',
+      // accept: 'images',//校验上传文件类型
+      // headers: {access_token: localStorage.access_token},
+      // acceptMime: "image/*",
+      // auto: true,
+      // multiple: false,//多文件上传
+      // field: "avator",//设置字段名
+      // before: function () {
+      //   layer.msg('上传中', {
+      //     icon: 16,
+      //     shade: 0.01
+      //   });
+      // },//上传loading
+      // done: function (res) {//上传完毕回调
+      //   layer.close(layer.index); //关闭loading
+      //   if (parseInt(res.code) === 0) {
+      //     layer.msg("修改成功！");
+      //     $(".avator").attr("src", hostLocation + "/avator" + res.data.avator);
+      //   }
+      // },
+      // error: function (res) {//请求异常回调
+      //    console.error(res);
+      // }
       upload.render({
         elem: '.upload-img'
-        ,url: '/user/upload/'
-        ,size: 50
+        ,url: '/user/upload'
+        // ,size: '1024*5'
         ,before: function(){
           avatarAdd.find('.loading').show();
         }
-        ,done: function(res){
-          if(res.status == 0){
-            $.post('/user/set/', {
-              avatar: res.url
-            }, function(res){
-              location.reload();
-            });
-          } else {
-            layer.msg(res.msg, {icon: 5});
-          }
-          avatarAdd.find('.loading').hide();
+        ,done: function(){
+          layer.alert("上传成功")
+          // if(res.status == 0){
+          //   $.post('/user/set/', {
+          //     avatar: res.url
+          //   }, function(res){
+          //     location.reload();
+          //   });
+          // } else {
+          //   layer.msg(res.msg, {icon: 5});
+          // }
+          // avatarAdd.find('.loading').hide();
         }
         ,error: function(){
-          avatarAdd.find('.loading').hide();
+          layer.alert("上传失败")
+          // avatarAdd.find('.loading').hide();
         }
       });
     });
